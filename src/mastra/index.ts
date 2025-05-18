@@ -7,7 +7,7 @@ import { CloudflareDeployer } from '@mastra/deployer-cloudflare';
 
 export const mastra = new Mastra({
 	deployer: new CloudflareDeployer({
-		scope: process.env.CLOUDFLARE_SCOPE || 'your-cloudflare-scope',
+		scope: process.env.CLOUDFLARE_ACCOUNT_ID || 'your-cloudflare-scope',
 		projectName: 'mastra-workers',
 		routes: [
 			{
@@ -24,7 +24,8 @@ export const mastra = new Mastra({
 	}),
 	agents: { weatherAgent, codeReviewerAgent },
 	storage: new LibSQLStore({
-		url: ':memory:',
+		url: 'libsql://mastra-worker-panda-finn.aws-ap-northeast-1.turso.io',
+		authToken: process.env.LIBSQL_AUTH_TOKEN || '',
 	}),
 	logger: createLogger({
 		name: 'Mastra',

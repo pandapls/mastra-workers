@@ -9,13 +9,6 @@ export const mastra = new Mastra({
 	deployer: new CloudflareDeployer({
 		scope: process.env.CLOUDFLARE_ACCOUNT_ID || 'your-cloudflare-scope',
 		projectName: 'mastra-workers',
-		routes: [
-			{
-				pattern: 'www.pandatest.site/mastra/*',
-				zone_name: 'pandatest.site',
-				custom_domain: true,
-			},
-		],
 		workerNamespace: 'production',
 		auth: {
 			apiToken: process.env.CLOUDFLARE_API_TOKEN || '',

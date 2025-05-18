@@ -27,7 +27,8 @@ export const codeReviewerAgent = new Agent({
 	tools: { AutoCodeReviewTool },
 	memory: new Memory({
 		storage: new LibSQLStore({
-			url: 'file:../mastra.db', // path is relative to the .mastra/output directory
+			url: 'libsql://mastra-worker-panda-finn.aws-ap-northeast-1.turso.io',
+			authToken: process.env.LIBSQL_AUTH_TOKEN || '',
 		}),
 		options: {
 			lastMessages: 10,

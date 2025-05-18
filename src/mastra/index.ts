@@ -11,7 +11,7 @@ export const mastra = new Mastra({
 		projectName: 'mastra-workers',
 		routes: [
 			{
-				pattern: 'pandatest.sitem/mastra/*',
+				pattern: 'www.pandatest.site/mastra/*',
 				zone_name: 'pandatest.site',
 				custom_domain: true,
 			},

@@ -7,24 +7,23 @@ import { CloudflareDeployer } from '@mastra/deployer-cloudflare';
 
 export const mastra = new Mastra({
 	deployer: new CloudflareDeployer({
-		scope: 'your-account-id',
-		projectName: 'your-project-name',
+		scope: process.env.CLOUDFLARE_SCOPE || 'your-cloudflare-scope',
+		projectName: 'mastra-workers',
 		routes: [
 			{
-				pattern: 'example.com/*',
-				zone_name: 'example.com',
+				pattern: 'pandatest.sitem/mastra/*',
+				zone_name: 'pandatest.site',
 				custom_domain: true,
 			},
 		],
-		workerNamespace: 'your-namespace',
+		workerNamespace: 'production',
 		auth: {
-			apiToken: 'your-api-token',
-			apiEmail: 'your-email',
+			apiToken: process.env.CLOUDFLARE_API_TOKEN || '',
+			apiEmail: 'lhf932650719@gmail.com',
 		},
 	}),
 	agents: { weatherAgent, codeReviewerAgent },
 	storage: new LibSQLStore({
-		// stores telemetry, evals, ... into memory storage, if it needs to persist, change to file:../mastra.db
 		url: ':memory:',
 	}),
 	logger: createLogger({

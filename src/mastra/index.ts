@@ -6,15 +6,19 @@ import { codeReviewerAgent } from './agents/CodeReviewerAgent';
 import { CloudflareDeployer } from '@mastra/deployer-cloudflare';
 
 export const mastra = new Mastra({
-	deployer: new CloudflareDeployer({
-		scope: process.env.CLOUDFLARE_ACCOUNT_ID || 'your-cloudflare-scope',
-		projectName: 'mastra-workers',
-		workerNamespace: 'production',
-		auth: {
-			apiToken: process.env.CLOUDFLARE_API_TOKEN || '',
-			apiEmail: 'lhf932650719@gmail.com',
-		},
-	}),
+	server: {
+		host: '0.0.0.0', // 允许外网访问
+		port: 4111,
+	},
+	// deployer: new CloudflareDeployer({
+	// 	scope: process.env.CLOUDFLARE_ACCOUNT_ID || 'your-cloudflare-scope',
+	// 	projectName: 'mastra-workers',
+	// 	workerNamespace: 'production',
+	// 	auth: {
+	// 		apiToken: process.env.CLOUDFLARE_API_TOKEN || '',
+	// 		apiEmail: 'lhf932650719@gmail.com',
+	// 	},
+	// }),
 	agents: { weatherAgent, codeReviewerAgent },
 	storage: new LibSQLStore({
 		url: 'libsql://mastra-worker-panda-finn.aws-ap-northeast-1.turso.io',
